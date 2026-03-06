@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  mapred-site.xml
+  MapReduce Configuration
+  Cluster: 3-node AWS EC2 t3.small
+  Memory tuned for t3.small — 256MB per map/reduce task
+  Author: Your Name
+-->
+<configuration>
+
+    <!-- Use YARN as the execution framework for MapReduce -->
+    <property>
+        <n>mapreduce.framework.name</n>
+        <value>yarn</value>
+        <description>Distributed execution framework. Set to yarn for cluster mode.</description>
+    </property>
+
+    <!-- Memory allocated per Map task -->
+    <property>
+        <n>mapreduce.map.memory.mb</n>
+        <value>256</value>
+        <description>Memory allocated for each Map task container in MB.</description>
+    </property>
+
+    <!-- Memory allocated per Reduce task -->
+    <property>
+        <n>mapreduce.reduce.memory.mb</n>
+        <value>256</value>
+        <description>Memory allocated for each Reduce task container in MB.</description>
+    </property>
+
+    <!-- JVM heap size for Map tasks -->
+    <property>
+        <n>mapreduce.map.java.opts</n>
+        <value>-Xmx200m</value>
+        <description>JVM options for Map tasks. Heap set to 200MB within 256MB container.</description>
+    </property>
+
+    <!-- JVM heap size for Reduce tasks -->
+    <property>
+        <n>mapreduce.reduce.java.opts</n>
+        <value>-Xmx200m</value>
+        <description>JVM options for Reduce tasks. Heap set to 200MB within 256MB container.</description>
+    </property>
+
+    <!-- Memory for ApplicationMaster -->
+    <property>
+        <n>yarn.app.mapreduce.am.resource.mb</n>
+        <value>256</value>
+        <description>Memory allocated for the MapReduce ApplicationMaster in MB.</description>
+    </property>
+
+    <!-- HADOOP_MAPRED_HOME for ApplicationMaster environment -->
+    <property>
+        <n>yarn.app.mapreduce.am.env</n>
+        <value>HADOOP_MAPRED_HOME=/home/hduser/hadoop</value>
+        <description>Environment variables for ApplicationMaster.</description>
+    </property>
+
+    <!-- HADOOP_MAPRED_HOME for Map task environment -->
+    <property>
+        <n>mapreduce.map.env</n>
+        <value>HADOOP_MAPRED_HOME=/home/hduser/hadoop</value>
+        <description>Environment variables for Map tasks.</description>
+    </property>
+
+    <!-- HADOOP_MAPRED_HOME for Reduce task environment -->
+    <property>
+        <n>mapreduce.reduce.env</n>
+        <value>HADOOP_MAPRED_HOME=/home/hduser/hadoop</value>
+        <description>Environment variables for Reduce tasks.</description>
+    </property>
+
+</configuration>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  yarn-site.xml
+  YARN Resource Manager Configuration
+  Cluster: 3-node AWS EC2 t3.small (2GB RAM each)
+  Memory tuned for t3.small instances
+  Author: Your Name
+-->
+<configuration>
+
+    <!-- ResourceManager hostname — runs on master node -->
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>master</value>
+        <description>The hostname of the ResourceManager.</description>
+    </property>
+
+    <!-- Enable MapReduce shuffle service on NodeManagers -->
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+        <description>Shuffle service needed for MapReduce jobs.</description>
+    </property>
+
+    <!-- Shuffle service class -->
+    <property>
+        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+    </property>
+
+    <!-- ResourceManager communication addresses -->
+    <property>
+        <name>yarn.resourcemanager.address</name>
+        <value>master:8032</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.scheduler.address</name>
+        <value>master:8030</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>
+        <value>master:8031</value>
+    </property>
+
+    <!-- Disable virtual memory check — required for low RAM instances -->
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+        <description>Disable virtual memory limit enforcement for t3.small compatibility.</description>
+    </property>
+
+    <!-- Disable physical memory check -->
+    <property>
+        <name>yarn.nodemanager.pmem-check-enabled</name>
+        <value>false</value>
+        <description>Disable physical memory limit enforcement for t3.small compatibility.</description>
+    </property>
+
+    <!-- Total memory available per NodeManager — tuned for 2GB t3.small -->
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>1536</value>
+        <description>Total memory available on each NodeManager node in MB.</description>
+    </property>
+
+    <!-- Minimum container allocation -->
+    <property>
+        <name>yarn.scheduler.minimum-allocation-mb</name>
+        <value>256</value>
+        <description>Minimum memory allocated per container in MB.</description>
+    </property>
+
+    <!-- Maximum container allocation -->
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>1536</value>
+        <description>Maximum memory allocated per container in MB.</description>
+    </property>
+
+    <!-- CPU cores available per NodeManager -->
+    <property>
+        <name>yarn.nodemanager.resource.cpu-vcores</name>
+        <value>2</value>
+        <description>Number of virtual CPU cores available per NodeManager.</description>
+    </property>
+
+</configuration>
